@@ -1,13 +1,13 @@
+import configs
 import psycopg2
-import os
 
 class Database:
     def __init__(self):
-        db_host = "localhost"
-        db_port = 5432
-        db_name = "catai"
-        db_user = "postgres"
-        db_password = os.environ.get("DB_PASSWORD")
+        db_host = configs.database.db_host
+        db_port = configs.database.db_port
+        db_name = configs.database.db_name
+        db_user = configs.database.db_user
+        db_password = configs.database.db_password
 
         self.connection = psycopg2.connect(
             host=db_host,

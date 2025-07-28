@@ -1,22 +1,19 @@
 from fastapi import APIRouter, HTTPException
-from user.register import user_register
-from user.login import user_login
 import models
+import users
 
 router = APIRouter()
 
 @router.post("/register")
 async def register(user: models.Register):
-    result, status = user_register(user)
+    result, status = users.auth.register(user)
     if status != 201:
         raise HTTPException(status_code=status, detail=result["error"])
     return result
 
 @router.post("/login")
 async def login(user: models.Login):
-    result, status = user_login(user)
-
+    result, status = users.auth.login(user)
     if status != 201:
-        print("Masuk")
         raise HTTPException(status_code=status, detail=result["error"])
     return result

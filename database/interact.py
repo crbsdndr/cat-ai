@@ -11,9 +11,6 @@ class Users(Database):
         except Exception as e:
             print("Error fetching users:", e)
 
-        finally:
-            self.close()
-
     def show(self, email: str):
         try:
             self.cursor.execute("SELECT * FROM users WHERE email = %s", (email,))
@@ -34,9 +31,6 @@ class Users(Database):
         except Exception as e:
             print("Error fetching user:", e)
 
-        finally:
-            self.close()
-
     def insert(self, name: str, email: str, password: str, role: str):
         try:
             self.cursor.execute("""
@@ -45,12 +39,16 @@ class Users(Database):
             """, (name, email, password, role))
             self.commit()
             print("Successfully inserted user into the database.")
-            return True
+            return {
+                "name": name,
+                "email": email,
+                "password": password,
+                "role": role
+            }
 
         except Exception as e:
             print("Error insert:", e)
             self.rollback()
             return False
 
-        finally:
-            self.close()
+user = Users()
