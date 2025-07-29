@@ -9,7 +9,3 @@ class Register(BaseModel):
 class Login(BaseModel):
     email: str
     password: str
-
-class Chat(BaseModel):
-    session_id: str
-    message: str

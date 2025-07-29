@@ -1,6 +1,6 @@
-from database.connect import Database
+import app.database.connect as database_connect
 
-class Users(Database):
+class Users(database_connect.Database):
     def index(self):
         try:
             self.cursor.execute("SELECT * FROM users")

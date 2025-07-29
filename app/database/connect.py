@@ -1,4 +1,4 @@
-import configs
+from app import configs
 import psycopg2
 
 class Database:
